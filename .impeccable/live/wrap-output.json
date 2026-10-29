@@ -1,0 +1,1 @@
+{"error":"element_ambiguous","fallback":"agent-driven","file":"src\\App.tsx","candidates":[{"startLine":204,"endLine":206},{"startLine":232,"endLine":234},{"startLine":272,"endLine":274}],"hint":"Multiple source elements match both classes/tag and textContent. Pass --element-id, a more specific --text, or write the wrapper manually. See \"Handle fallback\" in live.md."}

@@ -1,0 +1,283 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  /* Rest follow theme */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+:root {
+  --radius: 0.65rem;
+
+  /* LIGHT MODE — clean, airy, with your purple as accent */
+  --background: oklch(0.98 0.005 275); /* Very light cool gray (not pure white) */
+  --foreground: oklch(0.16 0.005 275); /* Deep cool gray */
+  --card: oklch(1 0 0); /* Pure white */
+  --card-foreground: oklch(0.16 0.005 275);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.005 275);
+
+  /* Brand purple (#8A4FFF) */
+  --primary: oklch(50.623% 0.26195 305.144); /* #8A4FFF */
+  --primary-foreground: oklch(0.985 0 0); /* White */
+
+  /* Harmonized secondary palette (305° base, desaturated) */
+  --secondary: oklch(0.92 0.02 305); /* Soft lavender */
+  --secondary-foreground: oklch(0.2 0.01 305);
+  --muted: oklch(0.94 0.01 305); /* Lightest lavender */
+  --muted-foreground: oklch(0.45 0.015 305);
+  --accent: oklch(0.91 0.025 305); /* Slightly richer than muted */
+  --accent-foreground: oklch(0.22 0.02 305);
+  /* Status roles: green = active, amber = limited / on hold, red = expired /
+     disabled or errors. Each is >= 4.5:1 on the card and on its own 10% tint. */
+  --success: oklch(0.50 0.135 150);
+  --success-foreground: oklch(0.985 0 0);
+  --warning: oklch(0.53 0.15 50);
+  --warning-foreground: oklch(0.985 0 0);
+  /* Info = ready to use / not started: calm blue, not the brand purple */
+  --info: oklch(0.50 0.12 235);
+  --destructive: oklch(0.55 0.21 25);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(0.88 0.01 305); /* Subtle purple-gray */
+  --input: oklch(0.93 0.015 305);
+  --ring: oklch(50.623% 0.26195 305.144); /* Same as primary — cohesive focus */
+
+  /* Charts: variations of your brand purple */
+  --chart-1: oklch(58% 0.22 295);
+  --chart-2: oklch(50.623% 0.26195 305.144);
+  --chart-3: oklch(50.623% 0.18 315);
+  --chart-4: oklch(50.623% 0.14 325);
+  --chart-5: oklch(50.623% 0.10 335);
+
+}
+
+.dark {
+  /* DARK MODE — matches your logo background & glow */
+  --background: oklch(0.12 0.008 305); /* Deep indigo-purple (≈ #1A122D) */
+  --foreground: oklch(0.93 0.005 305); /* Brighter for WCAG AA contrast */
+  --card: oklch(0.15 0.012 305); /* Slightly lighter for card elevation */
+  --card-foreground: oklch(0.93 0.005 305);
+  --popover: oklch(0.14 0.011 305);
+  --popover-foreground: oklch(0.93 0.005 305);
+
+  /* Brand purple, lifted for dark backgrounds */
+  --primary: oklch(65% 0.27 305.144); /* L=65% for better dark-mode visibility */
+  --primary-foreground: oklch(0.08 0 0); /* Near-black for contrast */
+
+  /* Dark-mode harmonized palette — contrast-tuned */
+  --secondary: oklch(0.24 0.03 305); /* Medium lavender */
+  --secondary-foreground: oklch(0.93 0.005 305);
+  --muted: oklch(0.18 0.015 305); /* Soft purple-gray */
+  --muted-foreground: oklch(0.72 0.02 305); /* Brighter for AA compliance */
+  --accent: oklch(0.20 0.025 305); /* Rich amethyst */
+  --accent-foreground: oklch(0.92 0.01 305);
+  --success: oklch(0.78 0.17 150);
+  --success-foreground: oklch(0.15 0.012 305);
+  --warning: oklch(0.82 0.15 80);
+  --warning-foreground: oklch(0.15 0.012 305);
+  --info: oklch(0.78 0.11 225);
+  --destructive: oklch(0.71 0.19 25);
+  --destructive-foreground: oklch(0.15 0.012 305);
+
+  --border: oklch(0.25 0.015 305); /* More visible borders */
+  --input: oklch(0.22 0.02 305);
+  --ring: oklch(65% 0.27 305.144); /* Matching primary glow */
+
+  /* Charts — luminous variants of your brand */
+  --chart-1: oklch(68% 0.24 295);
+  --chart-2: oklch(65% 0.27 305.144);
+  --chart-3: oklch(60% 0.22 315);
+  --chart-4: oklch(55% 0.18 325);
+  --chart-5: oklch(50% 0.14 335);
+}
+
+/* Scrollbar — theme-aware purple */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--primary) 40%, transparent);
+  border-radius: 9999px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--primary) 60%, transparent);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  /* One family for every language: Vazirmatn carries Persian and Latin.
+     Scripts it lacks (Chinese) fall through to the system face. */
+  :root {
+    --app-font: "Vazirmatn Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  html, body {
+    @apply bg-background text-foreground;
+    font-family: var(--app-font);
+  }
+
+  /* Persian RTL support */
+  html[lang="fa"] body {
+    direction: rtl;
+  }
+  /* Sonner sets its own font; keep toasts in the app face */
+  .toaster,
+  .toaster [data-sonner-toast] {
+    font-family: var(--app-font) !important;
+  }
+  html[lang="fa"] .toaster,
+  html[lang="fa"] .toaster [data-sonner-toast] {
+    direction: rtl;
+  }
+
+
+  /* Animations — refined timing */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Logo mark: each stroke draws itself in, then the signal arcs pulse
+     outward while the connection is live. Reduced motion lands on the
+     last frame (fully drawn, fully visible). */
+  @keyframes logo-draw {
+    0% { stroke-dashoffset: 1; opacity: 0; }
+    1% { opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 1; }
+  }
+  @keyframes logo-pulse {
+    0%, 100% { opacity: 1; }
+    55% { opacity: 0.28; }
+  }
+  .logo-draw {
+    stroke-dasharray: 1 1;
+    animation: logo-draw 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  /* The live pulse plays a couple of times (under 5 s) and then rests fully lit,
+     so nothing keeps moving on its own (WCAG 2.2.2) */
+  .logo-draw.logo-wave {
+    animation: logo-draw 0.7s cubic-bezier(0.16, 1, 0.3, 1) both,
+               logo-pulse 2.2s cubic-bezier(0.45, 0, 0.55, 1) 2;
+  }
+  .logo-draw.logo-wave.logo-wave-slow {
+    animation-duration: 0.7s, 4.4s;
+    animation-iteration-count: 1, 1;
+  }
+  /* Status card signal: lit arcs pulse outward while the connection is live */
+  .signal-pulse {
+    animation: logo-pulse 2.2s cubic-bezier(0.45, 0, 0.55, 1) 2;
+  }
+  .signal-pulse.signal-pulse-slow {
+    animation-duration: 4.4s;
+    animation-iteration-count: 1;
+  }
+  /* Ready (not started): the arcs light up once, inner to outer, then stay lit */
+  @keyframes signal-arm {
+    from { opacity: 0.15; }
+    to { opacity: 1; }
+  }
+  .signal-arm {
+    animation: signal-arm 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  /* Already drawn this visit: no draw-in, only the live pulse */
+  .logo-mark[data-drawn] .logo-draw {
+    animation: none;
+  }
+  .logo-mark[data-drawn] .logo-draw.logo-wave {
+    animation: logo-pulse 2.2s cubic-bezier(0.45, 0, 0.55, 1) 2;
+    animation-delay: 0s, 0s;
+  }
+  .logo-mark[data-drawn] .logo-draw.logo-wave.logo-wave-slow {
+    animation-duration: 4.4s;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+  .animate-accordion-down { animation: accordion-down 0.2s ease-out; }
+  .animate-accordion-up { animation: accordion-up 0.2s ease-out; }
+
+  /* Wordmark: solid brand colour, heavy weight */
+  .brand-wordmark {
+    font-family: var(--app-font);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    color: var(--primary);
+  }
+
+  /* Reduced motion: every animation lands on its last frame and every
+     transition snaps, so state still shows without movement. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Focus ring — brand-consistent */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px color-mix(in oklch, var(--ring) 30%, transparent);
+  }
+}

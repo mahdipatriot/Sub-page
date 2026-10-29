@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <!-- X-Frame-Options only works as an HTTP response header (browsers ignore it
+         in a <meta> tag and log an error), so send it from the panel/proxy:
+         X-Frame-Options: DENY -->
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <!-- P5.11: Content Security Policy to mitigate XSS and injection risks.
+         P5.11 fix: Removed 'unsafe-inline' from script-src by embedding the
+         initial data as a non-executable <script type="application/json"> tag
+         instead of an inline executable script. The React app reads the JSON
+         from this tag on startup (see src/lib/initialData.ts). style-src
+         'unsafe-inline' is still needed for the chart <style> injection.
+         font-src allows data: because the single-file build inlines the
+         self-hosted Vazirmatn font. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' https: data:; connect-src 'self' https:; object-src 'none'; frame-src 'none';" />
+    <title>{{ user.username | e }} | Roopsida</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='4 0 26 36' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%238A4FFF' stroke-width='3.4'%3E%3Cpath d='M9 33V12'/%3E%3Cpath d='M9 12a7 7 0 0 1 0 14'/%3E%3Cpath d='M13.5 26 22 33'/%3E%3C/g%3E%3Cg stroke='%238A4FFF' stroke-width='2.2'%3E%3Cpath d='M10.9 8.2a11 11 0 0 1 8.9 8.9'/%3E%3Cpath d='M11.6 4.2a15 15 0 0 1 12.2 12.2' stroke-opacity='.75'/%3E%3Cpath d='M12.3 0.3a19 19 0 0 1 15.4 15.4' stroke-opacity='.5'/%3E%3C/g%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- P5.11: Initial data embedded as JSON (non-executable). The
+         type="application/json" attribute ensures this tag is never
+         executed as JavaScript, even by browsers that don't enforce CSP.
+         The React app reads it via document.getElementById on startup. -->
+    <script type="application/json" id="initial-data">
+      {
+        "user": {% if user %}{% set user_data = {
+          "id": user.id,
+          "username": user.username,
+          "status": user.status.name if user.status else 'active',
+          "used_traffic": user.used_traffic,
+          "lifetime_used_traffic": user.lifetime_used_traffic,
+          "data_limit": user.data_limit,
+          "data_limit_reset_strategy": user.data_limit_reset_strategy.name if user.data_limit_reset_strategy else 'no_reset',
+          "expire": user.expire.isoformat() if user.expire else None,
+          "on_hold_expire_duration": user.on_hold_expire_duration,
+          "on_hold_timeout": user.on_hold_timeout.isoformat() if user.on_hold_timeout else None,
+          "group_ids": user.group_ids,
+          "created_at": user.created_at.isoformat() if user.created_at else None,
+          "edit_at": user.edit_at.isoformat() if user.edit_at else None,
+          "online_at": user.online_at.isoformat() if user.online_at else None,
+          "proxy_settings": {
+            "vmess": {"id": user.proxy_settings.vmess.id|string} if user.proxy_settings.vmess else None,
+            "vless": {"id": user.proxy_settings.vless.id|string, "flow": user.proxy_settings.vless.flow.name if user.proxy_settings.vless.flow else None} if user.proxy_settings.vless else None,
+            "trojan": {"password": user.proxy_settings.trojan.password} if user.proxy_settings.trojan else None,
+            "shadowsocks": {"password": user.proxy_settings.shadowsocks.password, "method": user.proxy_settings.shadowsocks.method.name if user.proxy_settings.shadowsocks.method else None} if user.proxy_settings.shadowsocks else None
+          },
+          "next_plan": {
+            "user_template_id": user.next_plan.user_template_id,
+            "data_limit": user.next_plan.data_limit,
+            "expire": user.next_plan.expire,
+            "add_remaining_traffic": user.next_plan.add_remaining_traffic
+          } if user.next_plan else None
+        } %}{{ user_data | tojson | safe }}{% else %}null{% endif %},
+        "links": {{ links | tojson | safe }},
+        "apps": {% if apps %}{% set apps_data = [] %}{% for app in apps %}{% if app %}{% set download_links_data = [] %}{% for link in app.download_links %}{% if link %}{% set link_dict = {
+          "name": link.name,
+          "url": link.url,
+          "language": link.language
+        } %}{% set _ = download_links_data.append(link_dict) %}{% endif %}{% endfor %}{% set app_dict = {
+          "name": app.name,
+          "icon_url": app.icon_url,
+          "import_url": app.import_url,
+          "description": app.description,
+          "recommended": app.recommended,
+          "platform": app.platform,
+          "download_links": download_links_data
+        } %}{% set _ = apps_data.append(app_dict) %}{% endif %}{% endfor %}{{ apps_data | tojson | safe }}{% else %}null{% endif %}
+      }
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

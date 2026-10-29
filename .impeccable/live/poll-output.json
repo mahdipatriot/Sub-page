@@ -1,0 +1,4 @@
+
+⚠ Carbonize cleanup REQUIRED before next poll. After cleanup, run live-complete.mjs --id cf7fee12. See reference/live.md "Required after accept".
+
+{"type":"accept","id":"cf7fee12","variantId":"2","pageUrl":"/","paramValues":{"ghost-blur":8,"breathe-speed":4},"token":"fe15d2c9-9bfa-4593-a12e-fce9fa70e09b","_acceptResult":{"handled":true,"file":"src\\App.tsx","carbonize":true,"todo":"REQUIRED before next poll: carbonize cleanup in src\\App.tsx. See reference/live.md \"Required after accept\"."},"_completionAck":{"ok":true,"type":"agent_done","final":false,"requiresComplete":true,"nextCommand":"live-complete.mjs --id cf7fee12","message":"Carbonize cleanup must be verified, then the session must be completed explicitly before polling again."}}

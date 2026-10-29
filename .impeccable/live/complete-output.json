@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "id": "cf7fee12",
+  "phase": "completed",
+  "snapshot": {
+    "id": "cf7fee12",
+    "phase": "completed",
+    "pageUrl": "/",
+    "sourceFile": "src/App.tsx",
+    "previewFile": null,
+    "previewMode": null,
+    "expectedVariants": 3,
+    "arrivedVariants": 3,
+    "visibleVariant": 2,
+    "paramValues": {
+      "ghost-blur": 8,
+      "breathe-speed": 4
+    },
+    "pendingEventSeq": null,
+    "pendingEvent": null,
+    "deliveryLease": null,
+    "checkpointRevision": 17,
+    "activeOwner": "c0be4ce9",
+    "sourceMarkers": {},
+    "fallbackMode": null,
+    "annotationArtifacts": [],
+    "diagnostics": [
+      {
+        "error": "carbonize_cleanup_required",
+        "file": "src/App.tsx",
+        "message": "Accepted variant still has carbonize markers that must be folded into source CSS."
+      }
+    ],
+    "updatedAt": "2026-07-10T16:39:23.325Z"
+  }
+}

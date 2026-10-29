@@ -1,0 +1,8 @@
+npm install typescript --save-dev --legacy-peer-deps
+npm run build
+
+
+نکات مورد نیاز:
+مسیر لینک ها: src/constants/project.ts
+مسیر زبان ها و برند: src/locales
+مسیر فایل استایل برای تغییر رنگ: src/index.css
